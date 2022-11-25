@@ -1,11 +1,15 @@
+import { randomInteger, wordIsExists } from "common/helpers";
 import { words } from "common/words";
 import { Ground } from "components/Ground";
 import { Keyboard } from "components/Keyboard";
 import React, { useState } from "react";
 
 function App() {
+  const [guessedWord] = useState(words[randomInteger(1, words.length)]);
   const [word, setWord] = useState("");
   const [attempt, setAttempt] = useState(1);
+
+  console.log(guessedWord);
 
   const getLetter = (letter: string) => {
     if (word.length < attempt * 5) {
@@ -21,10 +25,8 @@ function App() {
 
   const checkWord = () => {
     const currentWord = word.slice(word.length - 5);
-    if (words.includes(currentWord)) {
-      console.log("НАШЁЛ!");
-    } else {
-      console.log("Подумай ещё");
+    if (wordIsExists(currentWord)) {
+      console.log("ok");
     }
     setAttempt((prev) => prev + 1);
   };

@@ -1,3 +1,5 @@
+import { Context } from "context";
+import { useContext } from "react";
 import "./index.css";
 
 interface IProps {
@@ -13,23 +15,36 @@ export const Keyboard: React.FC<IProps> = ({
   checkWord,
   checkIsAvailable,
 }) => {
-  const upperRow = ["й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з", "х", "ъ"];
-  const middleRow = ["ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", "э"];
-  const lowerRow = ["я", "ч", "с", "м", "и", "т", "ь", "б", "ю"];
+  const { keyboard } = useContext(Context);
+  const upperRow = keyboard.slice(0, 12);
+  const middleRow = keyboard.slice(12, 23);
+  const lowerRow = keyboard.slice(23);
 
   return (
     <div>
       <div className="keyboard__row">
-        {upperRow.map((letter) => (
-          <div className="key" key={letter} onClick={() => getLetter(letter)}>
-            {letter}
+        {upperRow.map(({ code, wordExist, letterExact }) => (
+          <div
+            className={`key ${wordExist ? "key__gray" : ""} ${
+              letterExact ? "key__yellow" : ""
+            }`}
+            key={code}
+            onClick={() => getLetter(code)}
+          >
+            {code}
           </div>
         ))}
       </div>
       <div className="keyboard__row">
-        {middleRow.map((letter) => (
-          <div className="key" key={letter} onClick={() => getLetter(letter)}>
-            {letter}
+        {middleRow.map(({ code, wordExist, letterExact }) => (
+          <div
+            className={`key ${wordExist ? "key__gray" : ""} ${
+              letterExact ? "key__yellow" : ""
+            }`}
+            key={code}
+            onClick={() => getLetter(code)}
+          >
+            {code}
           </div>
         ))}
       </div>
@@ -42,9 +57,15 @@ export const Keyboard: React.FC<IProps> = ({
         >
           ✓
         </div>
-        {lowerRow.map((letter) => (
-          <div className="key" key={letter} onClick={() => getLetter(letter)}>
-            {letter}
+        {lowerRow.map(({ code, wordExist, letterExact }) => (
+          <div
+            className={`key ${wordExist ? "key__gray" : ""} ${
+              letterExact ? "key__yellow" : ""
+            }`}
+            key={code}
+            onClick={() => getLetter(code)}
+          >
+            {code}
           </div>
         ))}
         <div
