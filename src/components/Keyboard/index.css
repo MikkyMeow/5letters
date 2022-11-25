@@ -1,0 +1,29 @@
+.key {
+  width: 19px;
+  height: 28px;
+  border: 1px solid #888888;
+  border-radius: 4px;
+  margin: 2px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-family: Arial;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.key__gray {
+  background-color: #888888;
+}
+
+.keyboard__row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
+.keyboard__buttons {
+  width: 30px;
+}
