@@ -7,11 +7,11 @@ body {
 }
 
 .App {
+  margin-top: 40px;
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
@@ -19,4 +19,9 @@ div {
   user-select: none;
   color: white;
   text-transform: uppercase;
+}
+
+h3 {
+  font-size: 30px;
+  margin: 0 0 30px;
 }

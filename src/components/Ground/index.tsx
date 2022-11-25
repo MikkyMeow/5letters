@@ -10,7 +10,7 @@ export const Ground: React.FC<IProps> = ({ word }) => {
     array.push("");
   }
   return (
-    <div className="row">
+    <div className="ground">
       {array.map((letter, index) => (
         <div key={index} className="letter">
           {letter}

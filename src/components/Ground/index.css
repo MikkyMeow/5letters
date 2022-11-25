@@ -7,12 +7,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 30px;
 }
 
-.row {
+.ground {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   max-width: 320px;
-  margin: 0 auto;
+  margin: 0 auto 40px;
 }
