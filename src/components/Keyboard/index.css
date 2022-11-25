@@ -12,10 +12,16 @@
   font-family: Arial;
   text-transform: uppercase;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .key__gray {
   background-color: #888888;
+}
+
+.key__yellow {
+  background-color: yellow;
+  color: black;
 }
 
 .keyboard__row {
