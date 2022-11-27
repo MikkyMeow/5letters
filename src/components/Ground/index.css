@@ -17,3 +17,7 @@
   max-width: 320px;
   margin: 0 auto 40px;
 }
+
+.letter__red {
+  border-color: red;
+}

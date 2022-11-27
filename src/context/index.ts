@@ -1,6 +1,9 @@
+import { randomInteger } from "common/helpers";
+import { words } from "common/words";
 import React from "react";
+import { IState } from "./types";
 
-export const state = {
+export const state: IState = {
   keyboard: [
     { code: "й", wordExist: false, letterExact: false },
     { code: "ц", wordExist: false, letterExact: false },
@@ -35,6 +38,7 @@ export const state = {
     { code: "б", wordExist: false, letterExact: false },
     { code: "ю", wordExist: false, letterExact: false },
   ],
+  guessedWord: words[randomInteger(1, words.length)],
 };
 
-export const Context = React.createContext(state);
+export const Context = React.createContext<IState | null>(null);
