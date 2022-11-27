@@ -21,3 +21,13 @@
 .letter__red {
   border-color: red;
 }
+
+.letter__gray {
+  background-color: lightgray;
+  border-color: lightgray;
+  color: black;
+}
+
+.letter__yellow {
+  background-color: yellow;
+}

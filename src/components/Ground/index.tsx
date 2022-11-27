@@ -11,6 +11,7 @@ export const Ground: React.FC<IProps> = ({ word, isNotExist }) => {
   while (array.length < 30) {
     array.push({ code: "", letterExact: false, wordExist: false });
   }
+
   return (
     <div className="ground">
       {array.map((letter, index) => {
@@ -19,7 +20,9 @@ export const Ground: React.FC<IProps> = ({ word, isNotExist }) => {
         return (
           <div
             key={index}
-            className={`letter ${notExist ? "letter__red" : ""}`}
+            className={`letter ${notExist ? "letter__red" : ""} ${
+              letter.letterExact ? "letter__gray" : ""
+            } ${letter.wordExist ? "letter__yellow" : ""}`}
           >
             {letter.code}
           </div>

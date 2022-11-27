@@ -1,4 +1,4 @@
-import { wordIsExists } from "common/helpers";
+import { checkForExacts, checkForExists, wordIsExists } from "common/helpers";
 import { Ground } from "components/Ground";
 import { Keyboard } from "components/Keyboard";
 import { Context, state } from "context";
@@ -11,7 +11,7 @@ function App() {
   const [attempt, setAttempt] = useState(1);
   const [isNotExist, setIsNotExist] = useState(false);
 
-  console.log("Word is: ", context.guessedWord);
+  console.log("guessedWord", context.guessedWord);
 
   const getLetter = (letter: IKeyboard) => {
     if (word.length < attempt * 5) {
@@ -32,6 +32,9 @@ function App() {
       .map((l) => l.code)
       .join("");
     if (wordIsExists(currentWord)) {
+      const resultWithExists = checkForExists(context.guessedWord, word);
+      const result = checkForExacts(context.guessedWord, resultWithExists);
+      setWord((prev) => [...prev.slice(0, word.length - 5), ...result]);
       setAttempt((prev) => prev + 1);
     } else {
       setIsNotExist(true);
@@ -42,7 +45,7 @@ function App() {
   // document.addEventListener("keydown", (e) => {
   //   const charCode = e.key.charCodeAt(0);
   //   if (charCode > 1071 && charCode < 1104) {
-  //     getLetter(e.key);
+  //     getLetter({ code: e.key, letterExact: false, wordExist: false });
   //   }
   // });
 
