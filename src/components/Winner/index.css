@@ -1,0 +1,14 @@
+.winner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100vw - 30px);
+  height: 120px;
+  background-color: black;
+  border: 1px solid yellow;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

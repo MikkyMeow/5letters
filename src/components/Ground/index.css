@@ -30,4 +30,6 @@
 
 .letter__yellow {
   background-color: yellow;
+  border-color: yellow;
+  color: black;
 }

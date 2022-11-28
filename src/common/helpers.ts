@@ -26,15 +26,5 @@ export const checkForExacts = (guessed: string, word: IKeyboard[]) => {
     if (l.code === guessedWordArr[i]) return { ...l, wordExist: true };
     return l;
   });
-  console.log("result ", result);
   return result;
 };
-
-const a = ["с", "д", "о", "б", "а"];
-const b = [
-  { code: "т", wordExist: false, letterExact: false },
-  { code: "о", wordExist: false, letterExact: false },
-  { code: "п", wordExist: false, letterExact: false },
-  { code: "о", wordExist: false, letterExact: false },
-  { code: "р", wordExist: false, letterExact: false },
-];
