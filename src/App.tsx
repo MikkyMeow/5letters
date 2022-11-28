@@ -1,4 +1,9 @@
-import { checkForExacts, checkForExists, wordIsExists } from "common/helpers";
+import {
+  checkForExacts,
+  checkForExists,
+  keyboardUpdate,
+  wordIsExists,
+} from "common/helpers";
 import { Ground } from "components/Ground";
 import { Keyboard } from "components/Keyboard";
 import { Winner } from "components/Winner";
@@ -6,8 +11,9 @@ import { Context, state } from "context";
 import { IKeyboard } from "context/types";
 import React, { useState } from "react";
 
-function App() {
+const App = () => {
   const [context, setContext] = useState(state);
+  const [keyboard, setKeyboard] = useState<IKeyboard[]>(state.keyboard);
   const [word, setWord] = useState<IKeyboard[]>([]);
   const [attempt, setAttempt] = useState(1);
   const [isNotExist, setIsNotExist] = useState(false);
@@ -17,7 +23,10 @@ function App() {
 
   const getLetter = (letter: IKeyboard) => {
     if (word.length < attempt * 5) {
-      setWord((prev) => [...prev, letter]);
+      setWord((prev) => [
+        ...prev,
+        { ...letter, isExact: false, isExist: false, hasBeen: false },
+      ]);
     }
   };
 
@@ -36,6 +45,7 @@ function App() {
     if (wordIsExists(currentWord)) {
       const resultWithExists = checkForExists(context.guessedWord, word);
       const result = checkForExacts(context.guessedWord, resultWithExists);
+      setKeyboard(keyboardUpdate(keyboard, result));
       setWord((prev) => [...prev.slice(0, word.length - 5), ...result]);
       if (context.guessedWord === currentWord) return setIsWinner(true);
       setAttempt((prev) => prev + 1);
@@ -45,12 +55,19 @@ function App() {
   };
 
   // TODO: Добавить поддержку клавиатуры
-  // document.addEventListener("keydown", (e) => {
-  //   const charCode = e.key.charCodeAt(0);
-  //   if (charCode > 1071 && charCode < 1104) {
-  //     getLetter({ code: e.key, letterExact: false, wordExist: false });
-  //   }
-  // });
+  // useEffect(() => {
+  //   window.addEventListener("keydown", (e) => {
+  //     const charCode = e.key.charCodeAt(0);
+  //     if (charCode > 1071 && charCode < 1104) {
+  //       getLetter({
+  //         code: e.key,
+  //         isExact: false,
+  //         isExist: false,
+  //         hasBeen: false,
+  //       });
+  //     }
+  //   });
+  // }, []);
 
   return (
     // @ts-ignore
@@ -61,6 +78,7 @@ function App() {
         {isWinner && <Winner />}
         <Ground word={word} isNotExist={isNotExist} />
         <Keyboard
+          keyboard={keyboard}
           getLetter={getLetter}
           backSpace={backSpace}
           checkWord={checkWord}
@@ -69,6 +87,6 @@ function App() {
       </div>
     </Context.Provider>
   );
-}
+};
 
 export default App;

@@ -1,7 +1,8 @@
 export interface IKeyboard {
   code: string;
-  wordExist: boolean;
-  letterExact: boolean;
+  isExist: boolean;
+  isExact: boolean;
+  hasBeen: boolean;
 }
 
 export interface IState {

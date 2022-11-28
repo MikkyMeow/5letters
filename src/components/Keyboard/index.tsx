@@ -1,9 +1,8 @@
-import { Context } from "context";
-import { IKeyboard, IState } from "context/types";
-import { useContext } from "react";
+import { IKeyboard } from "context/types";
 import "./index.css";
 
 interface IProps {
+  keyboard: IKeyboard[];
   getLetter: (letter: IKeyboard) => void;
   backSpace: () => void;
   checkWord: () => void;
@@ -11,25 +10,24 @@ interface IProps {
 }
 
 export const Keyboard: React.FC<IProps> = ({
+  keyboard,
   getLetter,
   backSpace,
   checkWord,
   checkIsAvailable,
 }) => {
-  // @ts-ignore
-  const [context]: [IState] = useContext(Context);
-  const upperRow = context.keyboard.slice(0, 12);
-  const middleRow = context.keyboard.slice(12, 23);
-  const lowerRow = context.keyboard.slice(23);
+  const upperRow = keyboard.slice(0, 12);
+  const middleRow = keyboard.slice(12, 23);
+  const lowerRow = keyboard.slice(23);
 
   return (
     <div>
       <div className="keyboard__row">
         {upperRow.map((letter) => (
           <div
-            className={`key ${letter.wordExist ? "key__gray" : ""} ${
-              letter.letterExact ? "key__yellow" : ""
-            }`}
+            className={`key ${letter.hasBeen ? "key__has-been" : ""} ${
+              letter.isExist ? "key__exist" : ""
+            } ${letter.isExact ? "key__exact" : ""}`}
             key={letter.code}
             onClick={() => getLetter(letter)}
           >
@@ -40,9 +38,9 @@ export const Keyboard: React.FC<IProps> = ({
       <div className="keyboard__row">
         {middleRow.map((letter) => (
           <div
-            className={`key ${letter.wordExist ? "key__gray" : ""} ${
-              letter.letterExact ? "key__yellow" : ""
-            }`}
+            className={`key ${letter.hasBeen ? "key__has-been" : ""} ${
+              letter.isExist ? "key__exist" : ""
+            } ${letter.isExact ? "key__exact" : ""}`}
             key={letter.code}
             onClick={() => getLetter(letter)}
           >
@@ -52,8 +50,8 @@ export const Keyboard: React.FC<IProps> = ({
       </div>
       <div className="keyboard__row">
         <div
-          className={`key key__gray keyboard__buttons ${
-            checkIsAvailable ? "key__yellow" : ""
+          className={`key keyboard__buttons ${
+            checkIsAvailable ? "key__exact" : ""
           }`}
           onClick={() => checkIsAvailable && checkWord()}
         >
@@ -61,19 +59,16 @@ export const Keyboard: React.FC<IProps> = ({
         </div>
         {lowerRow.map((letter) => (
           <div
-            className={`key ${letter.wordExist ? "key__gray" : ""} ${
-              letter.letterExact ? "key__yellow" : ""
-            }`}
+            className={`key ${letter.hasBeen ? "key__has-been" : ""} ${
+              letter.isExist ? "key__exist" : ""
+            } ${letter.isExact ? "key__exact" : ""}`}
             key={letter.code}
             onClick={() => getLetter(letter)}
           >
             {letter.code}
           </div>
         ))}
-        <div
-          className="key key__gray keyboard__buttons"
-          onClick={() => backSpace()}
-        >
+        <div className="key keyboard__buttons" onClick={() => backSpace()}>
           ✗
         </div>
       </div>

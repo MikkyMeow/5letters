@@ -14,7 +14,7 @@ export const checkForExists = (guessed: string, word: IKeyboard[]) => {
   const guessedWordArr = guessed.split("");
   const currentWordArr = word.slice(word.length - 5).map((l) => l);
   const result = currentWordArr.map((l) => {
-    if (guessedWordArr.includes(l.code)) return { ...l, letterExact: true };
+    if (guessedWordArr.includes(l.code)) return { ...l, isExist: true };
     return l;
   });
   return result;
@@ -23,8 +23,23 @@ export const checkForExists = (guessed: string, word: IKeyboard[]) => {
 export const checkForExacts = (guessed: string, word: IKeyboard[]) => {
   const guessedWordArr = guessed.split("");
   const result = word.map((l, i) => {
-    if (l.code === guessedWordArr[i]) return { ...l, wordExist: true };
+    if (l.code === guessedWordArr[i]) return { ...l, isExact: true };
     return l;
   });
+  return result;
+};
+
+export const keyboardUpdate = (keyboard: IKeyboard[], word: IKeyboard[]) => {
+  const result = keyboard.map((letter) => {
+    const matchLetter = word.find((l) => l.code === letter.code);
+    if (matchLetter) {
+      return { ...matchLetter, hasBeen: true };
+    } else {
+      return letter;
+    }
+  });
+
+  console.log(word, result);
+
   return result;
 };

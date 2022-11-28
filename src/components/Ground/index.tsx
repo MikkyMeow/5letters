@@ -9,7 +9,7 @@ interface IProps {
 export const Ground: React.FC<IProps> = ({ word, isNotExist }) => {
   const array = [...word];
   while (array.length < 30) {
-    array.push({ code: "", letterExact: false, wordExist: false });
+    array.push({ code: "", isExact: false, isExist: false, hasBeen: false });
   }
 
   return (
@@ -21,8 +21,8 @@ export const Ground: React.FC<IProps> = ({ word, isNotExist }) => {
           <div
             key={index}
             className={`letter ${notExist ? "letter__red" : ""} ${
-              letter.letterExact ? "letter__gray" : ""
-            } ${letter.wordExist ? "letter__yellow" : ""}`}
+              letter.isExist ? "letter__gray" : ""
+            } ${letter.isExact ? "letter__yellow" : ""}`}
           >
             {letter.code}
           </div>
