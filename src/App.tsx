@@ -17,9 +17,17 @@ const App = () => {
   const [word, setWord] = useState<IKeyboard[]>([]);
   const [attempt, setAttempt] = useState(1);
   const [isNotExist, setIsNotExist] = useState(false);
-  const [isWinner, setIsWinner] = useState(false);
+  const [isWinner, setIsWinner] = useState<"winner" | "looser" | null>(null);
 
   console.log("guessedWord", context.guessedWord);
+
+  const newGame = () => {
+    setWord([]);
+    setKeyboard(state.keyboard);
+    setAttempt(1);
+    setIsWinner(null);
+    setIsNotExist(false);
+  };
 
   const getLetter = (letter: IKeyboard) => {
     if (word.length < attempt * 5) {
@@ -47,7 +55,8 @@ const App = () => {
       const result = checkForExacts(context.guessedWord, resultWithExists);
       setKeyboard(keyboardUpdate(keyboard, result));
       setWord((prev) => [...prev.slice(0, word.length - 5), ...result]);
-      if (context.guessedWord === currentWord) return setIsWinner(true);
+      if (context.guessedWord === currentWord) return setIsWinner("winner");
+      if (word.length === 30) return setIsWinner("looser");
       setAttempt((prev) => prev + 1);
     } else {
       setIsNotExist(true);
@@ -75,7 +84,13 @@ const App = () => {
       <div className="App">
         <h3>5 Б У К В</h3>
         <p>Попытка {attempt}</p>
-        {isWinner && <Winner />}
+        {isWinner && (
+          <Winner
+            isWinner={isWinner}
+            word={context.guessedWord}
+            newGame={newGame}
+          />
+        )}
         <Ground word={word} isNotExist={isNotExist} />
         <Keyboard
           keyboard={keyboard}

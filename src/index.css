@@ -22,3 +22,26 @@ h3 {
   font-size: 30px;
   margin: 0;
 }
+
+.button {
+  width: 120px;
+  height: 32px;
+  background-color: transparent;
+  border: 1px solid yellow;
+  border-radius: 4px;
+  color: white;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background-color: yellow;
+  color: black;
+}
+
+.button:active {
+  background-color: yellow;
+  color: black;
+  position: relative;
+  top: 1px;
+  left: 1px;
+}
