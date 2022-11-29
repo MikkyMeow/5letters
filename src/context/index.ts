@@ -1,5 +1,5 @@
+import { frequencyWords } from "common/frequencyWords";
 import { randomInteger } from "common/helpers";
-import { words } from "common/words";
 import React from "react";
 import { IState } from "./types";
 
@@ -38,7 +38,7 @@ export const state: IState = {
     { code: "б", isExist: false, isExact: false, hasBeen: false },
     { code: "ю", isExist: false, isExact: false, hasBeen: false },
   ],
-  guessedWord: words[randomInteger(1, words.length)],
+  guessedWord: frequencyWords[randomInteger(1, frequencyWords.length)],
 };
 
 export const Context = React.createContext<IState | null>(null);
