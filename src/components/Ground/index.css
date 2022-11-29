@@ -13,11 +13,12 @@
 .ground {
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   max-width: 340px;
   margin: 0 auto 40px;
-  height: calc(100vh - 270px);
-  overflow-y: auto;
+  height: calc(100vh - 300px);
+  overflow-y: hidden;
 }
 
 .letter__red {

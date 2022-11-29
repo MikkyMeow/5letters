@@ -20,8 +20,6 @@ const App = () => {
   const [isNotExist, setIsNotExist] = useState(false);
   const [isWinner, setIsWinner] = useState<"winner" | "looser" | null>(null);
 
-  console.log("guessedWord", context.guessedWord);
-
   const newGame = () => {
     setContext((prev) => {
       return { ...prev, guessedWord: guessWord() };
@@ -87,7 +85,6 @@ const App = () => {
     <Context.Provider value={[context, setContext]}>
       <div className="App">
         <h3>5 Б У К В</h3>
-        <p>Попытка {attempt}</p>
         {isWinner && (
           <Winner
             isWinner={isWinner}
