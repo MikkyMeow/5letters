@@ -9,8 +9,10 @@ interface IProps {
 export const Winner: React.FC<IProps> = ({ newGame, word, isWinner }) => {
   return (
     <div className="winner">
-      <p>Вы {isWinner === "winner" ? "победили!" : "проиграли :("}</p>
-      <p>Правильное слово: {word.toUpperCase()}</p>
+      <p className="winner__text">
+        Вы {isWinner === "winner" ? "победили!" : "проиграли :("}
+      </p>
+      <p className="winner__text">Правильное слово: {word.toUpperCase()}</p>
       <button className="button" onClick={newGame}>
         Новая игра
       </button>

@@ -14,8 +14,10 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 320px;
+  max-width: 340px;
   margin: 0 auto 40px;
+  height: calc(100vh - 270px);
+  overflow-y: auto;
 }
 
 .letter__red {

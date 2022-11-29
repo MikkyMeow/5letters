@@ -1,9 +1,14 @@
 import { IKeyboard } from "context/types";
+import { frequencyWords } from "./frequencyWords";
 import { words } from "./words";
 
 export const randomInteger = (min: number, max: number) => {
   const result = min + Math.random() * (max + 1 - min);
   return Math.floor(result);
+};
+
+export const guessWord = () => {
+  return frequencyWords[randomInteger(1, frequencyWords.length)];
 };
 
 export const wordIsExists = (word: string) => {
@@ -38,8 +43,6 @@ export const keyboardUpdate = (keyboard: IKeyboard[], word: IKeyboard[]) => {
       return letter;
     }
   });
-
-  console.log(word, result);
 
   return result;
 };

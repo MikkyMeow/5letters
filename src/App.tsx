@@ -1,6 +1,7 @@
 import {
   checkForExacts,
   checkForExists,
+  guessWord,
   keyboardUpdate,
   wordIsExists,
 } from "common/helpers";
@@ -22,6 +23,9 @@ const App = () => {
   console.log("guessedWord", context.guessedWord);
 
   const newGame = () => {
+    setContext((prev) => {
+      return { ...prev, guessedWord: guessWord() };
+    });
     setWord([]);
     setKeyboard(state.keyboard);
     setAttempt(1);

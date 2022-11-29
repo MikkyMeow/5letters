@@ -21,7 +21,7 @@ export const Keyboard: React.FC<IProps> = ({
   const lowerRow = keyboard.slice(23);
 
   return (
-    <div>
+    <div className="keyboard">
       <div className="keyboard__row">
         {upperRow.map((letter) => (
           <div
