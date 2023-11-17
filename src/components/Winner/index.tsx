@@ -13,7 +13,7 @@ export const Winner: React.FC<IProps> = ({ newGame, word, isWinner }) => {
         Вы {isWinner === "winner" ? "победили!" : "проиграли :("}
       </p>
       <p className="winner__text">Правильное слово: {word.toUpperCase()}</p>
-      <button className="button" onClick={newGame}>
+      <button className="button" onClick={() => newGame()}>
         Новая игра
       </button>
     </div>

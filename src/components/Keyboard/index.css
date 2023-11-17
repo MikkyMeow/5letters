@@ -5,10 +5,10 @@
 
 .key {
   width: 24px;
-  height: 35px;
+  height: 47px;
   border: 1px solid #888888;
   border-radius: 4px;
-  margin: 1px;
+  margin: 0;
   color: #ffffff;
   display: flex;
   justify-content: center;

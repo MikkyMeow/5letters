@@ -19,10 +19,11 @@ const App = () => {
   const [attempt, setAttempt] = useState(1);
   const [isNotExist, setIsNotExist] = useState(false);
   const [isWinner, setIsWinner] = useState<"winner" | "looser" | null>(null);
+  const [guessableWord, setGuessableWord] = useState("");
 
-  const newGame = () => {
+  const newGame = (word?: string) => {
     setContext((prev) => {
-      return { ...prev, guessedWord: guessWord() };
+      return { ...prev, guessedWord: word ? word : guessWord() };
     });
     setWord([]);
     setKeyboard(state.keyboard);
@@ -85,21 +86,48 @@ const App = () => {
     <Context.Provider value={[context, setContext]}>
       <div className="App">
         <h3>5 Б У К В</h3>
-        {isWinner && (
-          <Winner
-            isWinner={isWinner}
-            word={context.guessedWord}
-            newGame={newGame}
-          />
+        {!context.guessedWord ? (
+          <>
+            <div>lapti</div>
+            <input
+              style={{
+                backgroundColor: "transparent",
+                border: "1px solid yellow",
+                borderRadius: 4,
+              }}
+              value={guessableWord}
+              onChange={(e) =>
+                guessableWord.length < 5
+                  ? setGuessableWord(e.target.value)
+                  : undefined
+              }
+            />
+            <button className="button" onClick={() => newGame(guessableWord)}>
+              guess word
+            </button>
+            <button className="button" onClick={() => newGame()}>
+              Новая игра
+            </button>
+          </>
+        ) : (
+          <>
+            {isWinner && (
+              <Winner
+                isWinner={isWinner}
+                word={context.guessedWord}
+                newGame={newGame}
+              />
+            )}
+            <Ground word={word} isNotExist={isNotExist} />
+            <Keyboard
+              keyboard={keyboard}
+              getLetter={getLetter}
+              backSpace={backSpace}
+              checkWord={checkWord}
+              checkIsAvailable={!!word && !(word.length % (5 * attempt))}
+            />
+          </>
         )}
-        <Ground word={word} isNotExist={isNotExist} />
-        <Keyboard
-          keyboard={keyboard}
-          getLetter={getLetter}
-          backSpace={backSpace}
-          checkWord={checkWord}
-          checkIsAvailable={!!word && !(word.length % (5 * attempt))}
-        />
       </div>
     </Context.Provider>
   );

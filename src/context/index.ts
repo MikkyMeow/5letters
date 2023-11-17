@@ -38,7 +38,7 @@ export const state: IState = {
     { code: "б", isExist: false, isExact: false, hasBeen: false },
     { code: "ю", isExist: false, isExact: false, hasBeen: false },
   ],
-  guessedWord: frequencyWords[randomInteger(1, frequencyWords.length)],
+  guessedWord: "",
 };
 
 export const Context = React.createContext<IState | null>(null);
