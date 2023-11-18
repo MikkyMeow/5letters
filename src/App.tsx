@@ -7,6 +7,7 @@ import {
 } from "common/helpers";
 import { Ground } from "components/Ground";
 import { Keyboard } from "components/Keyboard";
+import { Start } from "components/Start";
 import { Winner } from "components/Winner";
 import { Context, state } from "context";
 import { IKeyboard } from "context/types";
@@ -19,7 +20,6 @@ const App = () => {
   const [attempt, setAttempt] = useState(1);
   const [isNotExist, setIsNotExist] = useState(false);
   const [isWinner, setIsWinner] = useState<"winner" | "looser" | null>(null);
-  const [guessableWord, setGuessableWord] = useState("");
 
   const newGame = (word?: string) => {
     setContext((prev) => {
@@ -85,32 +85,11 @@ const App = () => {
     // @ts-ignore
     <Context.Provider value={[context, setContext]}>
       <div className="App">
-        <h3>5 Б У К В</h3>
         {!context.guessedWord ? (
-          <>
-            <div>lapti</div>
-            <input
-              style={{
-                backgroundColor: "transparent",
-                border: "1px solid yellow",
-                borderRadius: 4,
-              }}
-              value={guessableWord}
-              onChange={(e) =>
-                guessableWord.length < 5
-                  ? setGuessableWord(e.target.value)
-                  : undefined
-              }
-            />
-            <button className="button" onClick={() => newGame(guessableWord)}>
-              guess word
-            </button>
-            <button className="button" onClick={() => newGame()}>
-              Новая игра
-            </button>
-          </>
+          <Start newGame={newGame} />
         ) : (
           <>
+            <h3>5 Б У К В</h3>
             {isWinner && (
               <Winner
                 isWinner={isWinner}

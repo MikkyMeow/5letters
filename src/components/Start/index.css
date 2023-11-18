@@ -1,0 +1,22 @@
+.start__root {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  align-items: center;
+  justify-content: center;
+}
+
+.start__items {
+  margin-bottom: 12px;
+}
+
+.start__input {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.start__input-button {
+  width: 32px;
+  height: 32px;
+}
